@@ -89,6 +89,3 @@ wget https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.2.tar.gz
 
 Important that you don't install libsdl2-dev package.
 
-# Ports
-
-

@@ -75,13 +75,16 @@ sudo chroot folder qemu-aarch64-static /bin/bash
 
 - Helpful development tools & libraries to have in the chroot
 
-```apt -y install build-essential git wget libdrm-dev python3 python3-pip python3-setuptools python3-wheel ninja-build libopenal-dev premake4 autoconf libevdev-dev ffmpeg libboost-tools-dev magics++ libboost-thread-dev libboost-all-dev pkg-config zlib1g-dev libsdl-mixer1.2-dev libsdl1.2-dev libsdl-gfx1.2-dev libsdl2-mixer-dev clang cmake cmake-data libarchive13 libcurl4 libfreetype6-dev librhash0 libuv1 mercurial mercurial-common libgbm-dev libsdl-image1.2-dev
 ```
+apt -y install build-essential git wget libdrm-dev python3 python3-pip python3-setuptools python3-wheel ninja-build libopenal-dev premake4 autoconf libevdev-dev ffmpeg libboost-tools-dev magics++ libboost-thread-dev libboost-all-dev pkg-config zlib1g-dev libsdl-mixer1.2-dev libsdl1.2-dev libsdl-gfx1.2-dev libsdl2-mixer-dev clang cmake cmake-data libarchive13 libcurl4 libfreetype6-dev librhash0 libuv1 mercurial mercurial-common libgbm-dev libsdl-image1.2-dev
+```
+
 
 - Install custom SDL2 Libraries for better compatiblity
 wget https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.2.tar.gz
 
-```./configure --prefix=/usr
+```
+./configure --prefix=/usr
 ```
 
 Important that you don't install libsdl2-dev package.

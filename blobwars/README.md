@@ -1,24 +1,24 @@
-# Gamename
+# Blob Wars: Metal Blob Solid
 
 # Source: 
 
-GIT Source
+https://sourceforge.net/projects/blobwars/
 
 # Controls
 
 
-
-## Needed libraries
-
-- You have to supply following libraries in the libs folder
-
- 
 ## Building
 
 ```
-Compile Instructions
+git clone https://git.code.sf.net/p/blobwars/code blobwars-code
+make CFLAGS="-Wno-error=format-truncation"
 ```
 Copy folders:
+
+data
+gfx
+music
+sound
 
 # Thanks
 

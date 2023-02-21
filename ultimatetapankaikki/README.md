@@ -37,5 +37,5 @@ Copy files:
 - OPTIONS.CFG
 
 # Thanks
-- Special thanks to @kloptops
+- Special thanks to @kloptops for helping me debug the game
 

@@ -37,4 +37,5 @@ You need following files downloaded into baseset:
 - opengfx-7.1.tar
 # Thanks
 
+Special thanks to @romadu for helping me optimize this port for all screen sizes.
 

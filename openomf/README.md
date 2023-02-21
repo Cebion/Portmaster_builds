@@ -1,25 +1,33 @@
-# Gamename
+# OpenOMF - One Must Fall 2097 Remake
 
-# Source: 
+## Source: 
 
-GIT Source
+https://github.com/omf2097/openomf
 
-# Controls
+## Controls
 
 
 
 ## Needed libraries
 
-- You have to supply following libraries in the libs folder
-
+You have to supply following libraries in the libs folder
+- libxmp.so.4
+- libenet.so.7
+- libconfuse.so.2
+- libargtable2.so.0
  
 ## Building
 
 ```
-Compile Instructions
+git clone https://github.com/omf2097/openomf.git
+mkdir build && cd build
+cmake ..
+make -j8
 ```
-Copy folders:
 
+Copy folders:
+- plugins 
+- gamedata
 # Thanks
 
 

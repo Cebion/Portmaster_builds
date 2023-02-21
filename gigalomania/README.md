@@ -1,25 +1,20 @@
-# Gamename
+# Gigalomania
 
 # Source: 
 
-GIT Source
+https://gigalomania.sourceforge.net/
 
 # Controls
 
-
-
-## Needed libraries
-
-- You have to supply following libraries in the libs folder
-
- 
 ## Building
 
 ```
-Compile Instructions
+git clone https://git.code.sf.net/p/gigalomania/code gigalomania-code
 ```
 Copy folders:
+- sound
+- music
+- islands
+- gfx
 
 # Thanks
-
-

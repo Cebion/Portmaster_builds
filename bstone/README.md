@@ -21,5 +21,5 @@ make -j12
 
 
 # Thanks
-
+Special thanks to @romadu for helping me fine tune the controls and scaling parameters.
 

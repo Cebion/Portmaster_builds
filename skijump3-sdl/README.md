@@ -1,10 +1,10 @@
-# Gamename
+# Ski Jump 3
 
-# Source: 
+## Source: 
 
-GIT Source
+https://github.com/suomipelit/skijump3-sdl
 
-# Controls
+## Controls
 
 
 
@@ -16,9 +16,10 @@ GIT Source
 ## Building
 
 ```
-Compile Instructions
+git clone https://github.com/suomipelit/skijump3-sdl.git
+git clone https://github.com/ev1313/Pascal-SDL-2-Headers
+fpc -Mtp -Fu./Pascal-SDL-2-Headers/ SJ3.PAS
 ```
-Copy folders:
 
 # Thanks
 

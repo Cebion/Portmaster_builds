@@ -1,24 +1,21 @@
-# Gamename
+# Wetspot 2
 
 # Source: 
 
-GIT Source
+https://geocities.restorativland.org/SiliconValley/Lakes/7303/
+https://github.com/dmitrysmagin/wetspot2
 
 # Controls
-
-
-
-## Needed libraries
-
-- You have to supply following libraries in the libs folder
-
  
 ## Building
 
 ```
-Compile Instructions
+wget https://github.com/dmitrysmagin/wetspot2.git
+make -j8
 ```
 Copy folders:
+- world
+- data
 
 # Thanks
 

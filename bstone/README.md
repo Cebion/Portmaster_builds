@@ -1,24 +1,24 @@
-# Gamename
+# Blake Stone Aliens of Gold & Blake Stone Planet Strike
 
 # Source: 
 
-GIT Source
+https://github.com/bibendovsky/bstone
 
 # Controls
 
 
 
-## Needed libraries
-
-- You have to supply following libraries in the libs folder
-
  
 ## Building
 
 ```
-Compile Instructions
+git clone https://github.com/bibendovsky/bstone.git
+mkdir build && cd build
+cmake .. 
+make -j12
+
 ```
-Copy folders:
+
 
 # Thanks
 

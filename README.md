@@ -90,10 +90,12 @@ apt -y install build-essential git wget libdrm-dev python3 python3-pip python3-s
 
 
 - Install custom SDL2 Libraries for better compatiblity
-wget https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.2.tar.gz
 
 ```
+wget https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.2.tar.gz
 ./configure --prefix=/usr
+make -j8
+make install
 ```
 
 Important that you don't install libsdl2-dev package.

@@ -58,11 +58,6 @@ sudo chroot folder qemu-aarch64-static /bin/bash
 ```rm /etc/resolv.conf
 nameserver 8.8.8.8
 ```
-- Update & Upgrade the chroot
-```
-apt-get update && apt-get upgrade 
-```
-
 - Exit chroot 
 - Create chroot.sh
 
@@ -75,6 +70,10 @@ sudo daemonize \
 sudo mount -o bind /proc folder/proc
 sudo mount -o bind /dev folder/dev
 sudo chroot folder qemu-aarch64-static /bin/bash
+```
+- Update & Upgrade the chroot
+```
+apt-get update && apt-get upgrade 
 ```
 
 - Helpful development tools & libraries to have in the chroot

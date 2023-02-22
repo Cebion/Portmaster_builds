@@ -27,7 +27,7 @@ g++-aarch64-linux-gnu
 
 ```
 mkdir folder
-sudo bsdtar -xpf focal-server-cloudimg-arm64-wsl.rootfs.tar.gz -C folder
+sudo bsdtar -xpf ubuntu-20.04-server-cloudimg-arm64-wsl.rootfs.tar.gz -C folder
 ```
 
 - Copy qemu static binary into that folder:

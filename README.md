@@ -61,7 +61,8 @@ nameserver 8.8.8.8
 - Exit chroot 
 - Create chroot.sh
 
-```#!/bin/bash
+```
+#!/bin/bash
 
 sudo daemonize \
 /usr/bin/unshare -fp --mount-proc \
@@ -71,6 +72,11 @@ sudo mount -o bind /proc folder/proc
 sudo mount -o bind /dev folder/dev
 sudo chroot folder qemu-aarch64-static /bin/bash
 ```
+- Make the chroot.sh executable
+```
+chmod +x chroot.sh
+```
+
 - Update & Upgrade the chroot
 ```
 apt-get update && apt-get upgrade 

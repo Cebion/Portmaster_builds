@@ -99,6 +99,9 @@ wget https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.2.tar.gz
 ./configure --prefix=/usr
 make -j8
 make install
+
+/sbin/ldconfig
+
 ```
 
 Important that you don't install libsdl2-dev package.

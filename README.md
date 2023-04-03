@@ -92,10 +92,15 @@ apt-get install --no-install-recommends build-essential git wget libdrm-dev pyth
 - Install custom SDL2 Libraries for better compatiblity
 
 ```
+rm /usr/lib/aarch64-linux-gnu/libSDL2.* 
+rm -rf /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so*
+
 wget https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.2.tar.gz
 ./configure --prefix=/usr
 make -j8
 make install
+
+
 ```
 
 Important that you don't install libsdl2-dev package.

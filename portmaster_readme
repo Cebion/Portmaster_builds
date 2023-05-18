@@ -1,0 +1,294 @@
+Welcome to the PortMaster Channels. Here you'll find all kind of information about Port, Games, and more.
+
+:lambda_hl1: **What is PortMaster?**
+
+PortMaster is a simple tool that allows you to download various game ports that are available for AmberELEC, ArkOS, uOS, RetroOZ, and TheRA for RK3326 based devices. Support for the RG552 has been added as well.
+
+One of the goals of PortMaster is to not install or upgrade any existing OS libraries for any ports. Any of the ports that need a particular non standard library are maintained within the ports' folder and made available specifically to that port during execution.
+
+Created by christianhaitian
+
+:hammeredit: **Project Information:**
+
+You can find the project on Github: https://github.com/christianhaitian/PortMaster/
+Wiki Entries with instructions how to load each Port:  https://github.com/christianhaitian/PortMaster/wiki
+Developer Instructions:  https://github.com/christianhaitian/PortMaster/blob/main/docs/packaging.md
+
+:please: **Help:**
+
+For help with Ports in general please visit our #portmaster-help  channel.
+Please avoid spamming, that means posting very rapidly with little regard for others. This also extends to posting the same thing in other channels.
+.
+
+:nuke:  **Development and how to contribute:**
+
+**What are Ports? ** 
+
+We have different types of games we support
+
+1) Open Source Games from Scratch by some devs
+2) Open Source Engines made from scratch that work with original game assets
+3) Game Engines like GameMaker studio / Godot etc. that have compatible runners that need the original gamedata
+4) Linux Userspace x86 Emulators that translate X86 Linux Games to Arm.
+
+So you will find all these mostly on github.
+Mind for 3/4 a LOT of hacking and tweaking is involved.
+
+for 1 and 2 often its just compile for arm and some tweak
+
+
+**How do we compile our games for PortMaster?**
+
+Since PortMaster is platform independent and delivers their own dependencies  we don't rely on the build mechanism of the CFWs out there.
+To compile games for the AARCH64 architecture you can do so by various ways.
+
+- WSL2 chroot 
+https://github.com/Cebion/Portmaster_builds
+
+- aarch64 chroot development VM by Christian (Virtual box VM with two chroot (aarch64 & armhf) instances. 
+https://forum.odroid.com/viewtopic.php?p=306185#p306185
+
+- create the chroot yourself:
+https://github.com/christianhaitian/arkos/wiki/Building#to-create-debian-based-chroots-in-a-linux-environment
+
+More info about getting into the chroots and some other helpful tools here: https://github.com/christianhaitian/arkos/wiki/Building#to-get-into-chroots
+
+- Cross-compiling tools for aarch64, with the arm64 SDL2 library etc.
+
+On the device you test via ssh, you can exit emustation via systemctl stop emustation (on amberelec at least).
+
+For packaging you can reference other Portmaster ports and also the PortMaster Wiki.
+Missing libs we supply directly in the port in a libs folder and do a ld_library_path (already included in the most portmaster games scripts)
+
+If you're interested or already did a Port you can gain access to our internal PortMaster Dev Channels. Feel free to Message me about it.
+
+:doom_lost_soul:  **Restrictions & Tools:**
+
+The Chipsets we're working with unfortunetaly have some restrictions in terms of features.
+So we can't just use any game, compile it and run it.
+
+Most CFWs that support PortMaster don't have full OpenGL or Display Drivers: So no openGL and no x11 / weston.
+
+Generally speaking Anbernic devices running a Rockchip SoC for example use the old 3.x Linux kernel with proprietary ARM drivers for Mali and not Panfrost. So only OpenGL ES is available for Linux.
+
+There is a translation layer called Gl4es which has a partial support of openGL up to OpenGL 2.x
+
+So we have: 
+OpenGL ES 2 support
+OpenGL 2.x  through GL4ES   
+https://github.com/ptitSeb/gl4es
+Box86 (Linux Userspace x86 Emulator, targeted at ARM Linux devices)  https://github.com/ptitSeb/box86 
+Box64 (Linux Userspace x86_64 Emulator, targeted at ARM64 Linux devices) https://github.com/ptitSeb/box64 
+gptokeyb for keyboard/mouse/joystick mapping using a control file
+https://github.com/kloptops/gptokeyb
+No Vulkan, No X11, No display manager at all so KMS/DRM it is.
+SDL1.2 through sdl1.2compat https://github.com/libsdl-org/sdl12-compat
+Gamemaker  Games Runner Research https://github.com/JohnnyonFlame/yyg_fix/blob/master/RESEARCH.md
+Godot Games via FRT 2
+ https://github.com/efornara/frt/tree/2.0
+ 
+ :banhammer~1:  **How to Package**
+
+Packaging Instructions: https://github.com/christianhaitian/PortMaster/blob/main/docs/packaging.md
+
+For an example see this Pull Request here https://github.com/christianhaitian/PortMaster/pull/54 on how to request a merge to the repo.  In the comments (not the ports.md file) make sure to include the sources you used for creating the port so I can add that to the portmaster wiki and credit to the original creator.  Also include any instructions and notes that users will need to know (such as assets needed) in order to be able to get the port up and running.  If you  have any changes made to the original source available in a public git, please note that as well so I can include that in the portmaster wiki.
+
+I recommend naming the game folder lowercase and the launch Script with an upperletter  with the same name.
+
+:rg351vd: **Device Informations:**
+
+:rg351b: RG351P/M Resolution: RK3326 1GB of RAM 320x480 (Screen is rotated via SDL2) - 2 Analog Sticks
+:rg351vg: RG351V Resolution: 640x480  1 GB of RAM
+:rg351p~1: RG351MP Resolution 640x480 1GB of RAM
+:rg351p~1: RG552 Resolution: 1920x1152 4GB of RAM
+RK3356 Devices: Resolution 640x480 2GB of RAM
+RG503 Resolution: 960 x 544 1GB of RAM
+
+
+:notepad_spiral: **Ports Launchscript Options **
+
+#########  Link configfolder to portmaster game ########
+WIP
+
+######### Work with different display resolutions ########
+```
+if [[ "$(cat /sys/firmware/devicetree/base/model | tr -d '\0')" == "Anbernic RG552" ]]; then
+  xres="1920"
+  yres="1152"
+  
+elif [[ -e "/sys/class/drm/card0-HDMI-A-1/status" ]] && [[ "$(cat /sys/class/drm/card0-HDMI-A-1/status)" == "connected" ]]; then
+  xres="$(cat /sys/class/drm/card0-HDMI-A-1/modes | grep -o -P '\d*x\d*' | cut -dx -f1)"
+  yres="$(cat /sys/class/drm/card0-HDMI-A-1/modes | grep -o -P '\d*x\d*' | cut -dx -f2)"
+elif [[ -e "/sys/class/drm/card0-HDMI-A-1/status" ]] && [[ "$(cat /sys/class/drm/card0-DSI-1/status)" == "connected" ]]; then
+  xres="$(cat /sys/class/drm/card0-DSI-1/modes | grep -o -P '\d*x\d*' | cut -dx -f1)"
+  yres="$(cat /sys/class/drm/card0-DSI-1/modes | grep -o -P '\d*x\d*' | cut -dx -f2)"
+else
+  xres=640
+  yres=480
+fi
+
+echo $xres
+echo $yres
+
+$ESUDO sed -i "s|window_width = [0-9]\+;|window_width = $xres;|g" $GAMEDIR/config/default.lua
+$ESUDO sed -i "s|window_height = [0-9]\+;|window_height = $yres;|g" $GAMEDIR/config/default.lua```
+
+#########  GL4ES ########
+If you want to use gl4es make sure to drop the libGL.so.1 library into the libs folder in your port.
+
+When using GL4ES you must also set the environment variables so that gl4es can work properly.
+For our devices these are almost always 
+
+```export LIBGL_ES=2
+export LIBGL_GL=21
+export LIBGL_FB=4```
+
+
+######### **GPTOKEYB: ** ########## 
+
+gptokeyb has the ability to act as a way to quit a game via start + select
+For this you call gptokeyb with the application name.
+
+ie. `./gptokeyb "application"` 
+
+If you want to additionally set a custom config for example you can then set the -c switch to start gptokeyb in virtuell keyboard mode.
+
+ie `./gptokeyb "application" -c mykeymaps.gptk`
+
+
+######### **Java: ** ########## 
+AmberELEC has JDK support already built in once you start a j2me game for the first time.
+You can supply this also via Portmaster.
+# Note you also need a display application for your java application. So just running a jar file without anything won't work.
+
+```# Example # 
+mkdir /storage/jdk
+https://cdn.azul.com/zulu-embedded/bin/zulu11.48.21-ca-jdk11.0.11-linux_aarch64.tar.gz
+tar xvfz zulu11.48.21-ca-jdk11.0.11-linux_aarch64.tar.gz
+JAVA_HOME='/storage/jdk/zulu11.48.21-ca-jdk11.0.11-linux_aarch64'
+export JAVA_HOME
+PATH="$JAVA_HOME/bin:$PATH"
+export PATH
+/usr/bin/retroarch -L /tmp/cores/freej2me_libretro.so --config /storage/.config/retroarch/retroarch.cfg "/tmp/Doom RPG.jar
+```
+
+########## **SDL 1.2 Compat** ###########
+
+If you're having problems with Scaling try using 
+ SDL12COMPAT_OPENGL_SCALING: (checked during SDL_Init)
+
+Enables scaling of OpenGL applications to the current desktop resolution.
+If disabled, applications can change the real screen resolution. This option is
+ enabled by default, but not all applications are compatible with it: try
+ changing this if you can only see a black screen.
+
+Also check 
+
+SDL12COMPAT_USE_GAME_CONTROLLERS=1
+
+Use SDL2's higher-level Game Controller API to expose joysticks instead of its lower-level joystick API. The benefit of this is that you can exert more control over arbitrary hardware (deadzones, button mapping, device name, etc), and button and axes layouts are consistent (what is physically located where an Xbox360's "A" button is will always be SDL 1.2 joystick button 0, "B" will be 1, etc).
+
+:keyboard: **Compile Notes**
+
+
+
+########## ** GL4ES** #########
+```
+cmake .. -DNOX11=ON -DGLX_STUBS=ON -DEGL_WRAPPER=ON -DGBM=ON
+```
+**### cannot guess build type ###**
+```
+wget 'http://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.guess;hb=HEAD' -O './config.guess' &&
+
+wget 'http://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.sub;hb=HEAD' -O './config.sub'```
+
+
+**########## Godot ##########**
+
+Godot Games are played via custom export template tailored to SBC devies without X11 based on KMS/DRM with SDL2.
+
+Limitations:
+Currently there is no mouse visible.
+
+Also note that in my custom fork of FRT all joystick code is disabled because Godot preconfigures controls and SDL picks up these keys without any chance to remap them afterwards. See <https://github.com/Cebion/frt>
+
+So all control is done via gptokeyb.
+
+To build:
+
+Download the godot editor version you need for the godot game.
+# You can find out the version by examining the .pck file with <https://dmitriysalnikov.itch.io/godot-pck-explorer>
+```
+wget https://downloads.tuxfamily.org/godotengine/3.5/godot-3.5-stable.tar.xz
+tar xf godot-3.5-stable.tar.xz
+cd godot-3.5-stable/platform
+git clone https://github.com/Cebion/frt.git
+cd ../
+scons platform=frt tools=no target=release use_llvm=yes module_webm_enabled=no -j12
+strip bin/godot.frt.opt.llvm```
+
+Then copy your binary to your game folder run it via:
+
+Either a .PCK file 
+
+```./frt_100_332_arm64.bin --main-pack meteor.pck ```
+
+Or via Folder:
+
+```/frt_3.2.3 --path godot-port-develop/```
+
+If you encounter an error like:
+
+```
+ERROR: Failed loading resource: res://gfx/UI.png. Make sure resources have been imported by opening the project in the editor at least once.
+   at: _load (core/io/resource_loader.cpp:271)
+ERROR: res://scenes/gui.tscn:11 - Parse Error: [ext_resource] referenced nonexistent resource at: res://gfx/UI.png
+```
+Make sure the File is in the correct format.
+For that import the project and reimport the file in the correct format.
+For example sometimes a png file imported as a Texture causes problems and needs to be imported as an image.
+
+Godot Editor -> Import Tab -> Filter for file in Filesystem -> Reimport As:
+
+
+**########## LÖVE ##########**
+
+KMS/DRM or FBDEV by default does not have a mouse cursor. 
+
+Because of that we have to create a software cursor for each game. 
+It's a simple process
+
+Download a cursor 
+example:
+```https://raw.githubusercontent.com/medeirosT/adwaita-2bit-cusors/main/left_ptr.png```  and place it in the game directory root.
+
+Edit the main.lua 
+
+1.  Edit the function love.load() and add
+```    -- Load your cursor image
+    cursorImage = love.graphics.newImage("left_ptr.png")```
+ 2. Hide the system cursor in the love.load() function: 
+```love.mouse.setVisible(false)```
+3. Draw the custom cursor image in a new drawCursor function and call it at the end of the love.draw() function:
+
+```
+function drawCursor()
+    local mouseX, mouseY = love.mouse.getPosition()
+    love.graphics.draw(cursorImage, mouseX, mouseY)
+end
+
+function love.draw()
+    -- Rest of the code
+
+    -- Draw the custom cursor
+    drawCursor()
+end```
+
+4. Add cursor scaling to love.update()
+```
+  local xOffset = (love.graphics.getWidth() - simpleScale.getScale() * gw) / 2
+  mx = (love.mouse.getX() - xOffset) / simpleScale.getScale()
+  my = love.mouse.getY() / simpleScale.getScale()```
+  
+  
+  

@@ -1,6 +1,7 @@
 # PortMaster - Builds
 
 This repository provides compile instructions for each port and how to setup the build environment used by me for my Ports.
+Also some inforamtion I gathered and wrote down over time.
 
 # Build Environment
 

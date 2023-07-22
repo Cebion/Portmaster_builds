@@ -77,7 +77,10 @@ sudo chroot folder qemu-aarch64-static /bin/bash
 ```
 chmod +x chroot.sh
 ```
-
+Chroot into the new environment
+```
+sudo ./chroot.sh
+```
 - Update & Upgrade the chroot
 ```
 apt-get update && apt-get upgrade 

@@ -100,6 +100,9 @@ rm /usr/lib/aarch64-linux-gnu/libSDL2.*
 rm -rf /usr/lib/aarch64-linux-gnu/libSDL2-2.0.so*
 
 wget https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.2.tar.gz
+tar xfv release-2.26.2.tar.gz
+cd SDL-release-2.26.2/
+
 ./configure --prefix=/usr
 make -j8
 make install

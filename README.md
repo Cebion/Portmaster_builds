@@ -59,7 +59,8 @@ sudo chroot folder qemu-aarch64-static /bin/bash
 ```rm /etc/resolv.conf
 nameserver 8.8.8.8
 ```
-- Exit chroot 
+- Exit chroot
+- mkdir -p folder/tmp/.X11-unix
 - Create chroot.sh
 
 ```
@@ -71,6 +72,8 @@ sudo daemonize \
 
 sudo mount -o bind /proc folder/proc
 sudo mount -o bind /dev folder/dev
+sudo mount -o bind /tmp/.X11-unix folder/tmp/.X11-unix
+xhost + local:
 sudo chroot folder qemu-aarch64-static /bin/bash
 ```
 - Make the chroot.sh executable
